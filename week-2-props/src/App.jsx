@@ -9,7 +9,7 @@ function App() {
 
   return (
     <>
-      <Revision name="Pat" age="25" />
+      <Revision p_name="Pat" p_age="25" p_role="CEO" />
     </>
   )
 }
