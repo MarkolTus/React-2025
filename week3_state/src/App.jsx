@@ -4,7 +4,9 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Counter from './components/Counter'
 import ToggleBg from './components/ToggleBg'
-import NameForm from './components/NameForm'
+import CVForms from './components/CVForms'
+import UseEffectForm from './components/UseEffectForm'
+import Example from './components/Example'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -12,8 +14,7 @@ function App() {
 
   return (
     <>
-      <Counter />
-      <ToggleBg />
+      <CVForms />
     </>
   )
 }
