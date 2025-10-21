@@ -2,16 +2,13 @@ import React, {useState, useEffect} from 'react';
 
 function Revision({p_name, p_age, p_role}) {
 //JavaScript logic goes here
-const yourName = "Tom";
-
-const [tempName, setTempName] = useState(localStorage.getItem('name') || ""); 
-const [tempAge, setTempAge] = useState(localStorage.getItem('age') || ""); 
-const [tempRole, setTempRole] = useState(localStorage.getItem('job') || ""); 
-
 const [name, setName] = useState(localStorage.getItem('name') || p_name || "");
 const [age, setAge] = useState(localStorage.getItem('age') || p_age || "");
 const [job, setJob] = useState(localStorage.getItem('job') || p_role || "");
 
+const [tempName, setTempName] = useState(name); 
+const [tempAge, setTempAge] = useState(age); 
+const [tempRole, setTempRole] = useState(job); 
 
 function handleClick(){
     setName(tempName)
@@ -19,17 +16,25 @@ function handleClick(){
     setJob(tempRole)
 }
 
-function handleName(e){
-    setTempName(e.target.value)
+function handleInput(e){
+    const {name, value} = e.target;
+    if(name == "name") { setTempName(value) }
+    if(name == "age") { setTempAge(value) }
+    if(name == "role") { setTempRole(value) }
 }
 
-function handleAge(e){
-    setTempAge(e.target.value)
-}
+// function handleName(e){
+//     alert(e.target.name)
+//     setTempName(e.target.value)
+// }
 
-function handleRole(e){
-    setTempRole(e.target.value)
-}
+// function handleAge(e){
+//     setTempAge(e.target.value)
+// } 
+
+// function handleRole(e){
+//     setTempRole(e.target.value)
+// }
 
 useEffect(
     ()=> {
@@ -46,19 +51,19 @@ useEffect(
             <br/><input 
                 type="text"
                 name="name"
-                onChange={handleName}
+                onChange={handleInput}
                 value={tempName}
             />
             <input 
                 type="text"
                 name="age"
-                onChange={handleAge}
+                onChange={handleInput}
                 value={tempAge}
             />
             <input 
                 type="text"
                 name="role"
-                onChange={handleRole}
+                onChange={handleInput}
                 value={tempRole}
             /><br/>
             <button onClick={handleClick}>Change Role</button>
