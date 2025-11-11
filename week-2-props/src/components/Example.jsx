@@ -1,14 +1,27 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Example() {
-  const [count, setCount] = useState(0); // [value, updater function]
+const [count, setCount] = useState(0);
+const [note, setNote] = useState("Hello");
 
-  return (
-    <div>
-      <p>You clicked {count} time{ count==1 ? '' : 's' }</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-    </div>
-  );
+//runs every time there is a re-render 
+useEffect(() => {
+ console.log("Runs every time the component is re-rendered");
+});
+
+useEffect(() => {
+console.log(note);
+}, [note]);
+
+return (
+ <div>
+ <button onClick={() => setCount(count + 1)}>increment</button>
+ <button onClick={() => setNote(note + "o")}>Add o</button>
+ </div>
+);
+
 }
+
+
 
 export default Example;
