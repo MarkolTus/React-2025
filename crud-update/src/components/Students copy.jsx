@@ -1,23 +1,25 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {useState} from 'react';
 
 function Students() {
 
-    // Get the JSON string from localStorage
     const storedStudents = localStorage.getItem("students");
+    // Initialize state from localStorage
+  const [students, setStudents] = useState(storedStudents ? JSON.parse(storedStudents) : []
+  );
 
-    // Parse it back into a JS object/array
-    const [students, setStudents] = useState(storedStudents ? JSON.parse(storedStudents) : []);
+  function deleteStudent(studentid) {
+    // Filter out the student to delete
+    const updatedStudents = students.filter(s => s.studentid !== studentid);
 
-    function deleteStudent(sid){
-        const updatedStudents = students.filter(s => s.studentid !== sid);
+    // Update both state and localStorage
+    setStudents(updatedStudents);
+    localStorage.setItem("students", JSON.stringify(updatedStudents));
+  }
 
-        setStudents(updatedStudents)
-
-        localStorage.setItem("students", JSON.stringify(updatedStudents));
-
-    }
-
+  function callAlert(){
+    alert("Tom")
+  }
 
     return (
         <>
@@ -30,8 +32,9 @@ function Students() {
                         { student.name}</Link> | &nbsp;
                         <Link to={`/edit/${student.studentid}`}>Edit &nbsp;{student.name}</Link>
                         <button onClick={() => deleteStudent(student.studentid)}>
-                            Delete {student.name}
-                        </button>
+                Delete {student.name}
+              </button>
+              <button onClick={callAlert}>Alert</button>
                 </li>
             )}
         </>

@@ -20,7 +20,10 @@ function App() {
     }
   ]
 
-  localStorage.setItem('students', JSON.stringify(students));
+  const storedStudents = localStorage.getItem("students");
+ if(!storedStudents){
+    localStorage.setItem('students', JSON.stringify(students));
+ }
 
 
   return (
