@@ -1,16 +1,29 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 function Example() {
-  const [count, setCount] = useState(0); // [value, updater function]
-  const [msg, setMsg] = useState('Hello');
+const [count, setCount] = useState(0);
+const [didLoad, setDidLoad] = useState(false); // local state flag
 
-  return (
+useEffect(() => {
+    setCount(Number(localStorage.getItem("count")))
+    console.log(count);
+ }, []);
+
+useEffect(() => {
+  if(didLoad){
+    console.log(count);
+    localStorage.setItem("count", count)
+  }else{
+    setDidLoad(true)
+  }
+ }, [count]);
+
+return (
     <div>
-      <p>You clicked {count} time{ count==1 ? '' : 's' }</p>
-      <button onClick={() => setCount(count + 1)}>Click me</button>
-      <button onClick={() => alert(msg)}>Say Hello</button>
+        <button onClick={() => setCount((c) => c + 1)}>increment</button>
     </div>
-  );
+);
+
 }
 
 export default Example;
