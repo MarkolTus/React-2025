@@ -5,7 +5,7 @@ import './App.css'
 import Counter from './components/Counter'
 import ToggleBg from './components/ToggleBg'
 import NameForm from './components/NameForm'
-import FoodForm from './components/FoodForm'
+import Example from './components/Example'
 
 function App() {
   const [count, setCount] = useState(0)
@@ -13,9 +13,7 @@ function App() {
 
   return (
     <>
-      <Counter />
-      <ToggleBg />
-      <FoodForm />
+      <Example />
     </>
   )
 }

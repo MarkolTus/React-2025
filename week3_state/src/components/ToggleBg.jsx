@@ -6,8 +6,9 @@ function ToggleBg({ value }) {
   return (
     <div>
       <button onClick={() => 
-      colour=='white'
-      ? setColour('black') : setColour('white') }> Toggle
+      colour=='white' ? setColour('black') : setColour('white') }
+      > 
+      Toggle
       </button>
       {document.body.style.backgroundColor = colour}
     </div>
