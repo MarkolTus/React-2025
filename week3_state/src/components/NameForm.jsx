@@ -1,7 +1,17 @@
 import { useState } from "react";
 
+
 function NameForm() {
   const [name, setName] = useState("");
+
+
+  function handleAddName(){
+    const section = document.querySelector("section");
+    section.innerHTML += <p>{name}</p>;
+
+    setName(""); // Clear input
+}
+
 
   return (
     <div>
@@ -11,8 +21,11 @@ function NameForm() {
         value={name}
         onChange={(e) => setName(e.target.value)}
       />
-      <p>Hello, {name || "stranger"}!</p>
-      <p>Hello, {name ? name : "stranger"}!</p>
+      <button onClick={handleAddName}>Add Name</button>
+     
+      <section>
+
+      </section>
     </div>
   );
 }

@@ -1,6 +1,9 @@
-import { useParams } from "react-router-dom"
+import { useState } from 'react';
+import { useParams, useNavigate } from "react-router-dom"
 
 function EditStudent() {
+
+    const navigate = useNavigate();
 
     // Get the JSON string from localStorage
     const storedStudents = localStorage.getItem("students");
@@ -12,12 +15,49 @@ function EditStudent() {
     const studentid = useParams().studentId
     const student = students.find(n => n.studentid === studentid)
 
+    const [sName, setSName] = useState(student.name || '');
+    const [sId, setSId] = useState(student.studentid || '');
+
+    const handleEdit = (e) => {
+        e.preventDefault();
+
+        const updatedStudent = {
+            name: sName,
+            studentid: sId,
+        };
+
+        const updatedStudents = students.map(s =>
+            s.studentid === studentid ? updatedStudent : s
+        );
+
+        localStorage.setItem("students",
+            JSON.stringify(updatedStudents));
+
+        navigate('/students');
+    }
+
     return (
         <>
-            <h1>Student Details</h1>
-            <h2>{student.name}</h2>
-            <div>{student.studentid}</div>
+            <h1>Edit {student.name}</h1>
+            <form onSubmit={handleEdit}>
+                <label>Name</label>
+                <input
+                type="text"
+                name="name"
+                value={sName}
+                onChange={(e) => setSName(e.target.value)}
+                />
 
+                <label>Student ID</label>
+
+                <input
+                type="text"
+                name="studentid"
+                value={sId}
+                onChange={(e) => setSId(e.target.value)}
+                />
+                <input type="submit" value="Save" />
+            </form>
         </>
     )
 }
