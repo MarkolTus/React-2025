@@ -6,21 +6,23 @@ import Student from './components/Student'
 import Navbar from './components/Navbar'
 import EditStudent from './components/EditStudent'
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import {useState, useEffect} from 'react';
 
 function App() {
 
-  const students = [
-    {
-      name: "Tom",
-      studentid: "k000324242"
-    },
-    {
-      name: "Ann",
-      studentid: "k00325624234"
-    }
-  ]
+  useEffect(() => {
+    fetch("http://localhost:5173/students.json")
+    .then(response => response.json())
+    .then(
+      data => { 
+        if(!localStorage.getItem("students")){
+        localStorage.setItem("students", JSON.stringify(data));
+        }
+      }
+    )
+  }, []);
 
-  localStorage.setItem('students', JSON.stringify(students));
+  //localStorage.setItem('students', JSON.stringify(students));
 
 
   return (
